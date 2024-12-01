@@ -23,7 +23,7 @@ const placeOrder = async(req,res)=> {
                 product_data: {
                     name: item.name
                 },
-                unit_amount: item.price
+                unit_amount: item.price * 100
             },
             quantity: item.quantity
         }))
@@ -34,7 +34,7 @@ const placeOrder = async(req,res)=> {
                 product_data: {
                     name: "Delivery Charges"
                 },
-                unit_amount: 2
+                unit_amount: 2 * 100
             },
             quantity: 1,
         })
@@ -52,7 +52,7 @@ const placeOrder = async(req,res)=> {
     }
 }
 
-const verifyOrder=async ()=>{
+const verifyOrder=async (req, res)=>{
     const {orderId, success} = req.body;
     try{
         if(success === "true"){
@@ -98,6 +98,5 @@ const updateStatus = async (req, res)=> {
         res.json({success: false, message: "Error"})
     }
 }
-
 
 export { placeOrder, verifyOrder, userOrders, listOrders, updateStatus}
